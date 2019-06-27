@@ -2,7 +2,7 @@
 $('#name').focus();
 // hide field for other option in the job role menu
 $('#other-title').hide();
-$('#design').children('option').hide();
+
 
 
 
@@ -14,16 +14,20 @@ $('#title').on('change', function() {
     }
 });
 
-$('#design').on('change', function() {
-    if($(this).val() == "other") {
-        $('#other-title').show();
-    } else {
-        $('#other-title').hide();
-    }
-});
 
-// $('#design').on('load', function() {
-//     if ($('#design').children('option').val() === 'select theme') {
-//         $(this).hide();
-//     }
-// });
+$('#design').ready(function() {
+    const $electTheme = $('#selectTheme');
+    $electTheme.hide();
+});
+console.log($('#design').val());
+
+$('#color').ready(function() {
+    $('#color').prepend('<option value="pleaseSelect" id="designMsg">Please select a T-shirt theme</option');
+    $('#color').val('pleaseSelect');
+    $('#color option').each(function() {
+        if($(this).val() !== 'pleaseSelect') {
+            $('#color option').hide();
+        }
+    });
+});
+console.log($('#color').val());
