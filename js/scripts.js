@@ -7,7 +7,7 @@ $('#other-title').hide();
 
 
 $('#title').on('change', function() {
-    if($(this).val() == "other") {
+    if($(this).val() === "other") {
         $('#other-title').show();
     } else {
         $('#other-title').hide();
@@ -16,8 +16,7 @@ $('#title').on('change', function() {
 
 
 $('#design').ready(function() {
-    const $electTheme = $('#selectTheme');
-    $electTheme.hide();
+    $('#selectTheme').hide();
 });
 console.log($('#design').val());
 
@@ -30,4 +29,20 @@ $('#color').ready(function() {
         }
     });
 });
-console.log($('#color').val());
+
+$('#design').on('change', function() {
+    console.log($('#design').val());
+    console.log($('#color').val());
+    if($('#design').val() == 'heart js') {
+        $('#color option').each(function() {
+            if($(this).val() === 'cornflowerblue') {
+                $('#color option').show();
+            }
+        });
+    }
+});
+
+$('#color').on('change', function() {
+    console.log($('#color').val());
+
+});
