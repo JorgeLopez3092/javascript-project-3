@@ -3,9 +3,7 @@ $('#name').focus();
 // hide field for other option in the job role menu
 $('#other-title').hide();
 
-
-
-
+// function to show other field only when other option is selected in drop down.
 $('#title').on('change', function() {
     if($(this).val() === "other") {
         $('#other-title').show();
@@ -13,13 +11,15 @@ $('#title').on('change', function() {
         $('#other-title').hide();
     }
 });
+// basic info section END
 
-
+// function to not show the select them option as an actual option when the shirt them menu is clicked.  It's only there to prompt the user to do something when the page loads
 $('#design').ready(function() {
     $('#selectTheme').hide();
 });
-console.log($('#design').val());
 
+
+// function to prompt a user to select a shirt theme on page load, but not have it actually be an option once the menu is clicked
 $('#color').ready(function() {
     $('#color').prepend('<option value="pleaseSelect" id="designMsg">Please select a T-shirt theme</option');
     $('#color').val('pleaseSelect');
@@ -30,19 +30,46 @@ $('#color').ready(function() {
     });
 });
 
+// functions to only show colors that are available for the tshirt selected when the user selects a tshirt design
 $('#design').on('change', function() {
     console.log($('#design').val());
     console.log($('#color').val());
-    if($('#design').val() == 'heart js') {
+    if($('#design').val() == 'js puns') {
         $('#color option').each(function() {
-            if($(this).val() === 'cornflowerblue') {
-                $('#color option').show();
+            if($(this).val() === 'cornflowerblue' || $(this).val() === 'darkslategrey' || $(this).val() === 'gold') {
+                $(this).show();
+                $('#color').val('cornflowerblue');
+            }   else {
+                $(this).hide();
+            }
+        });
+    } else if($('#design').val() == 'heart js') {
+        $('#color option').each(function() {
+            if($(this).val() === 'tomato' || $(this).val() === 'steelblue' || $(this).val() === 'dimgrey') {
+                $(this).show();
+                $('#color').val('tomato');
+            }   else {
+                $(this).hide();
             }
         });
     }
 });
+// tshirt section END
 
-$('#color').on('change', function() {
-    console.log($('#color').val());
-
+$('.activities').on('click', function() {
+    let price = 0;
+    console.log($('input[name=all]').is(':checked'));
+    console.log(price);
+    $('#activities').append(`<h2 id="price">Price is $${price}.00</h2>`)
+    $('#price').hide();
+    if(price > 0) {
+        $('#price').show();
+    }   else {
+        $('#price').hide();
+    }
+    if($('input[name=all]').is(':checked')) {
+        price += 200;
+    }
 });
+
+
