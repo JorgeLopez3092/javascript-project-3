@@ -56,20 +56,37 @@ $('#design').on('change', function() {
 });
 // tshirt section END
 
-$('.activities').on('click', function() {
-    let price = 0;
-    console.log($('input[name=all]').is(':checked'));
-    console.log(price);
-    $('#activities').append(`<h2 id="price">Price is $${price}.00</h2>`)
-    $('#price').hide();
-    if(price > 0) {
-        $('#price').show();
+let price = 0;
+const priceMsg = $('<p>Total: $<span id="priceMsg"></span></p>');
+$('.activities').append(priceMsg);
+priceMsg.hide();
+
+$('.activities input').on('change', function(e) {
+    let activity = e.target;
+    let activityLabel = activity.parentNode.textContent;
+    let dollaIndex = activityLabel.indexOf('$');
+    let costString = activityLabel.slice(dollaIndex + 1);
+    let cost = parseInt(costString);
+    if (activity.checked) {
+        price += cost;
     }   else {
-        $('#price').hide();
+        price -= cost;
     }
-    if($('input[name=all]').is(':checked')) {
-        price += 200;
+    if (price > 0) {
+        priceMsg.show();
+    }   else {
+        priceMsg.hide();
     }
+    console.log(price);
+    $('#priceMsg').text(`${price.toFixed(2)}`);
+// End pricing algorithm
+
+    let dashIndex = activityLabel.indexOf('—');
+    console.log(dashIndex);
+    let commaIndex = activityLabel.indexOf(',');
+    console.log(commaIndex);
+    let dayTime = activityLabel.slice(dashIndex + 2, commaIndex);
+    console.log(dayTime);
 });
 
 
