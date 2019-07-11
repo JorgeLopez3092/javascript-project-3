@@ -87,6 +87,16 @@ $('.activities input').on('change', function(e) {
     console.log(commaIndex);
     let dayTime = activityLabel.slice(dashIndex + 2, commaIndex);
     console.log(dayTime);
+    const inputArr = document.querySelectorAll('.activities input');
+    console.log(inputArr[0].textContent.slice(dashIndex + 2, commaIndex));
+    for(let i = 0; i < inputArr.length; i++) {
+        console.log(inputArr[i].parentNode.textContent.slice(dashIndex + 2, commaIndex));
+        if(dayTime === inputArr[i].parentNode.textContent.slice(dashIndex + 2, commaIndex) && activity !== inputArr[i]) {
+            $(this).prop("disabled", true);
+        }   else {
+            $(this).prop("disabled", false);
+        }
+    }
 });
 
 
