@@ -1,49 +1,40 @@
-// let selectedTimes = [
-//     'Tuesday 1pm-4pm',
-//   ];
+let selectedTimes = [];
   
-//   function getTime(str) {
-//     if (typeof str !== 'string') return null;
-//     return str
-//       .slice(str.indexOf('—') + 1, str.indexOf(','))
-//       .trim();
-//   }
+function getTime(str) {
+    if (typeof str !== 'string') return null;
+    return str
+      .slice(str.indexOf('—') + 1, str.indexOf(','))
+      .trim();
+  }
   
-//   function isSelectable(time) {
-//     return selectedTimes.indexOf(time) === -1;
-//   }
-  
-  
-  
-//   const strings = [
-//     'JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100',
-//     'Something Else — Tuesday 1pm-4pm, $200',
-//     'Something Else — Tuesday 5pm-7pm, $200',
-//   ];
-  
-  
-  
-//   console.clear();
-  
-//   strings.forEach((string) => {
-//     const time = getTime(string);
-//     const enabled = isSelectable(time);
+function isSelectable(time) {
+    return selectedTimes.indexOf(time) === -1;
+  }
     
-//     console.log(string, enabled)
-//   });
+const strings = [
+    'Main Conference — $200',
+    'JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100',
+    'JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100',
+    'Express Workshop — Tuesday 9am-12pm, $100',
+    'Node.js Workshop — Tuesday 1pm-4pm, $100',
+    'Build tools Workshop — Wednesday 9am-12pm, $100',
+    'npm Workshop — Wednesday 1pm-4pm, $100',        
+  ];
+  
+  
+  
+  console.clear();
+  
+strings.forEach((string) => {
+    const time = getTime(string);
+    const enabled = isSelectable(time);
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
+const time = 'Tuesday 1pm-4pm';
+selectedTimes = selectedTimes.filter((t) => t !== time).concat(time);
+// selectedTimes = [ ...selectedTimes.filter((t) => t !== time)];
+// console.log(selectedTimes);
 
 
 // focus on first form field when page loads
@@ -128,37 +119,41 @@ $('.activities input').on('change', function(e) {
     console.log(price);
     $('#priceMsg').text(`${price.toFixed(2)}`);
 // End pricing algorithm
-
-    getTime(e.target);
+    const time = ;
+    selectedTimes = selectedTimes.filter((t) => t !== time).concat(time);
+    getTime(activityLabel);
+    isSelectable(time)
 
 });
 
 
-function getTime(activity) {
-    const inputArr = document.querySelectorAll('.activities input')
-    for(let i = 0; i < inputArr.length * 2; i++) {  
-        let activityLabel = activity.parentNode.textContent;
-        let dashIndex = activityLabel.indexOf('—');
-        let commaIndex = activityLabel.indexOf(',');
-        let dayTime = activityLabel.slice(dashIndex + 2, commaIndex);   
-        let loopDash = inputArr[i].parentNode.textContent.indexOf('—');
-        let loopComma = inputArr[i].parentNode.textContent.indexOf(',');
-        console.log(dashIndex);
-        console.log(commaIndex);
-        console.log(dayTime);
-        console.log(inputArr[i].parentNode.textContent.slice(loopDash + 2, loopComma));
-        if(dayTime === inputArr[i].parentNode.textContent.slice(loopDash + 2, loopComma) && activity !== inputArr[i]) {
-            $(inputArr[i]).prop("disabled", true);
-        }   else if ($(inputArr[i]).is(':disabled')) {
-            $(inputArr[i]).prop("disabled", true);
-        }   else {
-            $(inputArr[i]).prop("disabled", false);
-        }
-        if($(inputArr[i]).is(':checked')) {
-            $(inputArr[i]).prop("disabled", false);
-        }
-        if (activity.is(':checked') === false) {
-            $(inputArr[i]).prop("disabled", false);
-        }
-    }
-};
+
+
+// function getTime(activity) {
+//     const inputArr = document.querySelectorAll('.activities input')
+//     for(let i = 0; i < inputArr.length * 2; i++) {  
+//         let activityLabel = activity.parentNode.textContent;
+//         let dashIndex = activityLabel.indexOf('—');
+//         let commaIndex = activityLabel.indexOf(',');
+//         let dayTime = activityLabel.slice(dashIndex + 2, commaIndex);   
+//         let loopDash = inputArr[i].parentNode.textContent.indexOf('—');
+//         let loopComma = inputArr[i].parentNode.textContent.indexOf(',');
+//         console.log(dashIndex);
+//         console.log(commaIndex);
+//         console.log(dayTime);
+//         console.log(inputArr[i].parentNode.textContent.slice(loopDash + 2, loopComma));
+//         if(dayTime === inputArr[i].parentNode.textContent.slice(loopDash + 2, loopComma) && activity !== inputArr[i]) {
+//             $(inputArr[i]).prop("disabled", true);
+//         }   else if ($(inputArr[i]).is(':disabled')) {
+//             $(inputArr[i]).prop("disabled", true);
+//         }   else {
+//             $(inputArr[i]).prop("disabled", false);
+//         }
+//         if($(inputArr[i]).is(':checked')) {
+//             $(inputArr[i]).prop("disabled", false);
+//         }
+//         if (activity.is(':checked') === false) {
+//             $(inputArr[i]).prop("disabled", false);
+//         }
+//     }
+// };
