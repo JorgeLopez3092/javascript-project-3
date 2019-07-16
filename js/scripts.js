@@ -1,3 +1,4 @@
+// let selectedTimes = [];
 let selectedTimes = [];
   
 function getTime(str) {
@@ -6,33 +7,32 @@ function getTime(str) {
       .slice(str.indexOf('—') + 1, str.indexOf(','))
       .trim();
   }
-  
 function isSelectable(time) {
     return selectedTimes.indexOf(time) === -1;
   }
     
-const strings = [
-    'Main Conference — $200',
-    'JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100',
-    'JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100',
-    'Express Workshop — Tuesday 9am-12pm, $100',
-    'Node.js Workshop — Tuesday 1pm-4pm, $100',
-    'Build tools Workshop — Wednesday 9am-12pm, $100',
-    'npm Workshop — Wednesday 1pm-4pm, $100',        
-  ];
+// const strings = [
+//     'Main Conference — $200',
+//     'JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100',
+//     'JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100',
+//     'Express Workshop — Tuesday 9am-12pm, $100',
+//     'Node.js Workshop — Tuesday 1pm-4pm, $100',
+//     'Build tools Workshop — Wednesday 9am-12pm, $100',
+//     'npm Workshop — Wednesday 1pm-4pm, $100',        
+//   ];
   
   
   
-  console.clear();
+//   console.clear();
   
-strings.forEach((string) => {
-    const time = getTime(string);
-    const enabled = isSelectable(time);
-});
+// strings.forEach((string) => {
+//     const time = getTime(string);
+//     const enabled = isSelectable(time);
+// });
 
 
-const time = 'Tuesday 1pm-4pm';
-selectedTimes = selectedTimes.filter((t) => t !== time).concat(time);
+// const time = 'Tuesday 1pm-4pm';
+// selectedTimes = selectedTimes.filter((t) => t !== time).concat(time);
 // selectedTimes = [ ...selectedTimes.filter((t) => t !== time)];
 // console.log(selectedTimes);
 
@@ -119,10 +119,30 @@ $('.activities input').on('change', function(e) {
     console.log(price);
     $('#priceMsg').text(`${price.toFixed(2)}`);
 // End pricing algorithm
-    const time = ;
-    selectedTimes = selectedTimes.filter((t) => t !== time).concat(time);
-    getTime(activityLabel);
-    isSelectable(time)
+    let _time = getTime(activityLabel);
+    console.log(selectedTimes);
+    if(activity.checked) {
+        selectedTimes = selectedTimes.filter((t) => t !== _time).concat(_time);
+    } else {
+        selectedTimes = selectedTimes.filter((t) => t !== _time)
+    }
+    console.log(selectedTimes);
+    let activityArray = $('.activities input');
+    for (let i = 0; i < activityArray.length; i++) {
+        const input = activityArray[i];
+        let activityArrayLabel = input.parentNode.textContent;
+        let time = getTime(activityArrayLabel);
+        const selectable = isSelectable(time)
+            && time !== _time;
+        console.log(i, selectable);
+        if (!selectable && input !== activity) {
+            input.disabled = true;
+        } else if (selectable) {
+            input.disabled = false;
+        }
+    }
+    
+    
 
 });
 
