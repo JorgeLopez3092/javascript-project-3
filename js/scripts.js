@@ -130,14 +130,13 @@ $('.activities input').on('change', function(e) {
     let activityArray = $('.activities input');
     for (let i = 0; i < activityArray.length; i++) {
         const input = activityArray[i];
-        let activityArrayLabel = input.parentNode.textContent;
-        let time = getTime(activityArrayLabel);
-        const selectable = isSelectable(time)
-            && time !== _time;
+        const activityArrayLabel = input.parentNode.textContent;
+        const time = getTime(activityArrayLabel);
+        const selectable = isSelectable(time);
         console.log(i, selectable);
-        if (!selectable && input !== activity) {
+        if (!selectable && activityLabel !== activityArrayLabel && input.checked === false) {
             input.disabled = true;
-        } else if (selectable) {
+        } else {
             input.disabled = false;
         }
     }
