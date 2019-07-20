@@ -1,5 +1,8 @@
 let selectedTimes = [];
-  
+const nameField = $('#name').val();
+const emailField = $('#mail');
+const cardField = $('#cc-num');
+   
 function getTime(str) {
     if (typeof str !== 'string') return null;
     return str
@@ -18,6 +21,7 @@ function isSelectable(time) {
     }
   }
 
+
 function nameValidator(name) {
     return /^[a-z]+$/.test(name);
 }
@@ -27,18 +31,44 @@ function emailValidator(email) {
   }
   
 let selectedActivities = 0;
-function activityValidator() {
-    for(let i = 0; i < $('activities input').length; i++) {
-        if ($('.activities input')[i].checked === true) {
-        selectedActivities += 1;
-        console.log($('.activities input')[i], $('activities input')[i].checked)
-        }
+function activityValidator(target) {
+    if(target.checked === true) {
+        selectedActivities++
+    } else {
+        selectedActivities--
+    }
+    console.log(selectedActivities)
+    if(selectedActivities > 0) {
+        return true;
+    } else {
+        return false;
     }
 }
-  
-$('.activities input').on('change', function() {
-activityValidator();
 
+function creditCardValidator(creditcard) {
+    const visa = new RegExp("^4[0-9]{12}(?:[0-9]{3})?$");
+    const amex = new RegExp("^3[47][0-9]{13}$");
+    const mastercard = new RegExp("^5[1-5][0-9]{14}$");
+    if(visa.test(creditcard) || amex.test(creditcard) || mastercard.test(creditcard)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+$('button').on('click', function(e) {
+    e.preventDefault();
+    console.log(emailValidator(emailField));
+    if(!nameValidator(nameField)) {
+        $('#name').css('border-color', 'red');
+    } else {
+        alert('somethings wrong!');
+    }
+});
+  
+$('.activities input').on('change', function(e) {
+    let regactivities = activityValidator(e.target);
+    console.log(regactivities)
 })
 
 // focus on first form field when page loads
