@@ -1,7 +1,9 @@
 let selectedTimes = [];
-const nameField = $('#name').val();
+const nameField = $('#name');
 const emailField = $('#mail');
 const cardField = $('#cc-num');
+const zipCodeField = $('#zip');
+const cvvField = $('#cvv');
    
 function getTime(str) {
     if (typeof str !== 'string') return null;
@@ -23,7 +25,7 @@ function isSelectable(time) {
 
 
 function nameValidator(name) {
-    return /^[a-z]+$/.test(name);
+    return /^[a-z]+$/i.test(name);
 }
 
 function emailValidator(email) {
@@ -56,13 +58,22 @@ function creditCardValidator(creditcard) {
     }
 }
 
+function zipValidator(zipCode) {
+    return /^\d{5}$/.test(zipCode);
+}
+
+function cvvValidator(zipCode) {
+    return /^\d{3,4}$/.test(zipCode);
+}
+
 $('button').on('click', function(e) {
     e.preventDefault();
-    console.log(emailValidator(emailField));
-    if(!nameValidator(nameField)) {
+    console.log(cvvValidator(cvvField.val()));
+    if(!emailValidator(emailField.val())) {
         $('#name').css('border-color', 'red');
-    } else {
         alert('somethings wrong!');
+    } else {
+        
     }
 });
   
@@ -132,6 +143,7 @@ const priceMsg = $('<p>Total: $<span id="priceMsg"></span></p>');
 $('.activities').append(priceMsg);
 priceMsg.hide();
 
+
 $('.activities input').on('change', function(e) {
     let activity = e.target;
     let activityLabel = activity.parentNode.textContent;
@@ -180,3 +192,11 @@ $('#payment').on('change', function() {
     paymentDisplay('bitcoin', '#bitcoin')
 });
 
+
+
+    // let somethingschecked = false;
+    // activityArray.each((i, input) => {
+    //     if (input.checked) {
+    //         somethingschecked = true;
+    //     }
+    // });
