@@ -62,14 +62,21 @@ function zipValidator(zipCode) {
     return /^\d{5}$/.test(zipCode);
 }
 
-function cvvValidator(zipCode) {
-    return /^\d{3,4}$/.test(zipCode);
+function cvvValidator(cvv) {
+    return /^\d{3,4}$/.test(cvv);
 }
 
 $('button').on('click', function(e) {
     e.preventDefault();
-    console.log(cvvValidator(cvvField.val()));
-    if(!emailValidator(emailField.val())) {
+    const checkboxes = $('.activities input')
+    let checkedBoxes = 0;
+    for (let i = 0; i < checkboxes.length; i++) {
+        if  (checkboxes[i].checked) {
+            checkedBoxes += 1
+        }
+    }
+    console.log(checkedBoxes);
+    if  (nameValidator(nameField.val()) && emailValidator(emailField.val()) && checkedBoxes > 0) {
         $('#name').css('border-color', 'red');
         alert('somethings wrong!');
     } else {
