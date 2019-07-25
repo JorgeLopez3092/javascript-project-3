@@ -39,7 +39,6 @@ function activityValidator(target) {
     } else {
         selectedActivities--
     }
-    console.log(selectedActivities)
     if(selectedActivities > 0) {
         return true;
     } else {
@@ -75,10 +74,15 @@ $('button').on('click', function(e) {
             checkedBoxes += 1
         }
     }
-    console.log(checkedBoxes);
     if  (nameValidator(nameField.val()) && emailValidator(emailField.val()) && checkedBoxes > 0) {
-        $('#name').css('border-color', 'red');
-        alert('somethings wrong!');
+        console.log(nameValidator(nameField.val()), emailValidator(emailField.val()), checkedBoxes > 0)
+        if ($('#payment').val() === 'credit card') {
+            console.log($('#payment').val())
+            if (creditCardValidator(cardField.val()) && zipValidator(zipCodeField.val()) && cvvValidator(cvvField.val())) {
+                console.log('Its working!');
+                document.reload();
+            }
+        }
     } else {
         
     }
