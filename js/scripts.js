@@ -200,7 +200,7 @@ $('button').on('click', function(e) {
             emailField.css('border-color', 'red');
             emailField.focus();
         }   else    {
-            nameField.css('border-color', '#b0d3e2')
+            emailField.css('border-color', '#b0d3e2')
         }
         if  (!nameValidator(nameField.val())) {
             nameField.css('border-color', 'red')
